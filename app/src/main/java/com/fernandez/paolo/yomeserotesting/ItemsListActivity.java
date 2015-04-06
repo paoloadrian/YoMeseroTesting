@@ -2,11 +2,8 @@ package com.fernandez.paolo.yomeserotesting;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -17,7 +14,7 @@ public class ItemsListActivity extends Activity
     public void onCreate(Bundle saveInstanceState)
     {
         super.onCreate(saveInstanceState);
-        setContentView(R.layout.items_list);
+        setContentView(R.layout.item_list);
 
         // Get the reference of ListViewAnimals
         ListView items=(ListView)findViewById(R.id.item_list_view);

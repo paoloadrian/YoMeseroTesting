@@ -82,7 +82,7 @@ public class MainActivity extends ActionBarActivity {
             try {
                 setContentView(R.layout.activity_main);
                 JSONArray json_items = new JSONArray(result);
-                List<String> items = new ArrayList<>();
+                ArrayList<String> items = new ArrayList<>();
                 Item aux;
                 for (int i = 0; i < json_items.length(); i++) {
                     aux = new Item();
@@ -90,10 +90,8 @@ public class MainActivity extends ActionBarActivity {
                     items.add(aux.toString());
                     ItemsListActivity list_activity = new ItemsListActivity();
                     list_activity.getItems();
-                    //Intent intentItemList=new Intent(getApplicationContext(),ItemsListActivity.class);
-                    //startActivity(intentItemList);
-                    //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-                    //itemsListView.setAdapter(arrayAdapter);
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.item_list, R.id.item_text_view, items);
+                    itemsListView.setAdapter(arrayAdapter);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
