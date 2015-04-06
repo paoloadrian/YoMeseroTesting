@@ -1,5 +1,6 @@
 package com.fernandez.paolo.yomeserotesting;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -43,7 +44,6 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         // get reference to the views
-        item_text_view = (TextView) findViewById(R.id.item_text_view);
         tvIsConnected = (TextView) findViewById(R.id.tvIsConnected);
         itemsListView = (ListView) findViewById(R.id.itemsListView);
 
@@ -57,7 +57,7 @@ public class MainActivity extends ActionBarActivity {
         }
 
         // call AsynTask to perform network operation on separate thread
-        new HttpAsyncTask().execute("https://frozen-springs-8168.herokuapp.com/items.json");
+        new HttpAsyncTask(this).execute("https://frozen-springs-8168.herokuapp.com/items.json");
     }
 
     public boolean isConnected(){
@@ -70,6 +70,11 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private class HttpAsyncTask extends AsyncTask<String, Void, String> {
+        private  Context context;
+        public HttpAsyncTask(Context context){
+            this.context = context;
+        }
+
         @Override
         protected String doInBackground(String... urls) {
 
@@ -80,7 +85,6 @@ public class MainActivity extends ActionBarActivity {
         protected void onPostExecute(String result) {
             Toast.makeText(getBaseContext(), "Received!", Toast.LENGTH_LONG).show();
             try {
-                setContentView(R.layout.activity_main);
                 JSONArray json_items = new JSONArray(result);
                 ArrayList<String> items = new ArrayList<>();
                 Item aux;
@@ -88,11 +92,9 @@ public class MainActivity extends ActionBarActivity {
                     aux = new Item();
                     aux.parseFromJson(json_items.getJSONObject(i));
                     items.add(aux.toString());
-                    ItemsListActivity list_activity = new ItemsListActivity();
-                    list_activity.getItems();
-                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.item_list, R.id.item_text_view, items);
-                    itemsListView.setAdapter(arrayAdapter);
                 }
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, R.layout.item_list, R.id.item_text_view, items);
+                itemsListView.setAdapter(arrayAdapter);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

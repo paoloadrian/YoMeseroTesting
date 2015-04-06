@@ -16,8 +16,8 @@ public class Item {
             name = json.getString("item_name");
             description = json.getString("item_description");
             type = json.getString("item_type");
-            time = json.getInt("time");
-            price = Float.parseFloat(json.getString("item_description"));
+            time = Integer.parseInt(json.getString("time"));
+            price = Float.parseFloat(json.getString("price"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -25,6 +25,6 @@ public class Item {
 
     @Override
     public String toString(){
-        return "Name: "+name+"\n"+"Type: "+type+"\n"+"time: "+time+"\n"+"Price: "+price;
+        return "Name: "+name+"\n"+"Type: "+type+"\n"+"Time: "+Integer.toString(time)+"\n"+"Price: "+Float.toString(price);
     }
 }
