@@ -16,8 +16,8 @@ public class Item {
             name = json.getString("item_name");
             description = json.getString("item_description");
             type = json.getString("item_type");
-            time = Integer.parseInt(json.getString("time"));
-            price = Float.parseFloat(json.getString("price"));
+            time = Integer.parseInt(json.getString("item_time"));
+            price = Float.parseFloat(json.getString("item_price"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

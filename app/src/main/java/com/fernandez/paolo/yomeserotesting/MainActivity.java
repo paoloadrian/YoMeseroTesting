@@ -1,7 +1,6 @@
 package com.fernandez.paolo.yomeserotesting;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -11,7 +10,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,20 +20,16 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
-
 
 public class MainActivity extends ActionBarActivity {
 
-    TextView item_text_view;
-    TextView tvIsConnected;
+    //TextView tvIsConnected;
     ListView itemsListView;
 
     @Override
@@ -44,17 +38,17 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         // get reference to the views
-        tvIsConnected = (TextView) findViewById(R.id.tvIsConnected);
+        //tvIsConnected = (TextView) findViewById(R.id.addItemLabel);
         itemsListView = (ListView) findViewById(R.id.itemsListView);
 
         // check if you are connected or not
-        if(isConnected()){
-            tvIsConnected.setBackgroundColor(0xFF00CC00);
-            tvIsConnected.setText("You are connected");
-        }
-        else{
-            tvIsConnected.setText("You are NOT connected");
-        }
+//        if(isConnected()){
+//            tvIsConnected.setBackgroundColor(0xFF00CC00);
+//            tvIsConnected.setText("You are connected");
+//        }
+//        else{
+//            tvIsConnected.setText("You are NOT connected");
+//        }
 
         // call AsynTask to perform network operation on separate thread
         new HttpAsyncTask(this).execute("https://frozen-springs-8168.herokuapp.com/items.json");
